@@ -31,6 +31,8 @@ defmodule EQRCode.Encode do
           input
         :alphanumeric ->
           EQRCode.Alphanumeric.from_binary(input)
+        _ ->
+          raise(ArgumentError, message: "mode not supported")
       end
     {:ok, version} = version(input, error_correction_level, mode)
     cci_len = SpecTable.character_count_indicator_bits(version, error_correction_level, mode)
