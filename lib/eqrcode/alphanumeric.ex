@@ -49,6 +49,31 @@ defmodule EQRCode.Alphanumeric do
     ?: => 44,
   }
 
+  @doc """
+  Takes a string and encodes each pair of characters into an
+  11 bit binary. If the string had an odd number of characters
+  the last character is encoded as a 6 bit binary.
+
+  More info: https://www.thonky.com/qr-code-tutorial/alphanumeric-mode-encoding
+
+  ## Examples
+
+    iex> EQRCode.Alphanumeric.from_binary("ABCD")
+    <<57, 168, 41::size(6)>>
+
+    iex> EQRCode.Alphanumeric.from_binary("ABC")
+    <<57, 166, 0::size(1)>>
+
+    iex> EQRCode.Alphanumeric.from_binary("AB")
+    <<57, 5::size(3)>>
+
+    iex> EQRCode.Alphanumeric.from_binary("A")
+    <<10::size(6)>>
+
+    iex> EQRCode.Alphanumeric.from_binary("")
+    ""
+
+  """
   @spec from_binary(binary()) :: binary()
   def from_binary(<<one, two, rest::binary>>) do
     value = (45 * @lookup_table[one]) + @lookup_table[two]
