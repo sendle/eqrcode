@@ -2,7 +2,7 @@ defmodule EQRCode.Alphanumeric do
 
   @doc """
   Takes a string and encodes each pair of characters into an
-  11 bit binary. If the string had an odd number of characters
+  11 bit binary. If the string has an odd number of characters
   the last character is encoded as a 6 bit binary.
 
   More info: https://www.thonky.com/qr-code-tutorial/alphanumeric-mode-encoding
